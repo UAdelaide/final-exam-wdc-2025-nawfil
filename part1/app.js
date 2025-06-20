@@ -12,7 +12,7 @@ let db;
     db = await mysql.createConnection({
       host: 'localhost',
       user: 'root',
-      password: 'your_password', // 🔁 Replace with your MySQL password
+      password: '',
       database: 'DogWalkService'
     });
     console.log('✅ Connected to DogWalkService database');
