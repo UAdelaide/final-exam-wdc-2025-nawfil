@@ -51,8 +51,7 @@ let db;
             ((SELECT dog_id FROM Dogs WHERE name='Luna'), '2025-06-11 14:30:00', 20, 'Riverbank Walk', 'open'),
             ((SELECT dog_id FROM Dogs WHERE name='Coco'), '2025-06-12 07:00:00', 40, 'Botanic Gardens', 'open')
         );
-
-
+        
       console.log('✅ Test data inserted.');
     }
   } catch (err) {
