@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dog of the Day</title>
+  <script src="https://unpkg.com/vue@3"></script>
+  <style>
+    body {
+      background: linear-gradient(#ff0, #0f0);
+      font-family: Comic Sans MS;
+      font-size: 20px;
+      color: #222;
+    }
+
+    .dog-info {
+      margin-top: 20px;
+      border: 5px dotted red;
+      padding: 50px;
+    }
+
+    button {
+      margin: 30px;
+      font-size: 25px;
+      background: pink;
+      border-radius: 15px;
+      cursor: pointer;
+    }
+
+    img {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1>WELCOME TO THE 🐶 DOG WALKING PAGE WITH LOTS OF WORDS AND CAPS AND EMOJIS!!!</h1>
+    <p>Please click the button below to see the best dog today which is chosen randomly from an infinite list of dogs that are not stored in any database but come from an API that might or might not be working. 🌀</p>
+
+    <button @click="loadDog">CLICK THIS BUTTON TO LOAD THE DOG! 🐾</button>
+
+    <div v-if="dogImage" class="dog-info">
+      <h2>DOG OF THE DAY</h2>
+      <!-- No alt text - accessibility issue -->
+      <img :src="dogImage">
+      <p><strong>Name:</strong> Sir Barkalot McFluff IV</p>
+      <p><strong>Breed:</strong> Super Ultra Rare Mixed 🐕‍🦺</p>
+      <p><strong>Fun Fact:</strong> Barks exactly 73 times every morning.</p>
+    </div>
+
+    <p>To proceed, press the button again. Then again. Then again. Just keep clicking. 🙂</p>
+  </div>
+
+  <script>
+    const { createApp } = Vue;
+
+    createApp({
+      data() {
+        return {
+          dogImage: null
+        };
+      },
+      methods: {
+        async loadDog() {
+          const res = await fetch('https://dog.ceo/api/breeds/image/random');
+          const data = await res.json();
+          this.dogImage = data.message;
+        }
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>
