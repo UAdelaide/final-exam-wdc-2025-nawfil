@@ -139,17 +139,19 @@
           }
         }
 
-        onMounted(async() => {
-          try {
-            loadDogs();
-            loadWalks();
-            const res = await fetch('/api/users/me');
-            const user = await res.json();
-            username.value = user.username;
-          } catch (err) {
-            console.error('Failed to load user info:', err);
-          }
-        });
+        onMounted(async () => {
+  try {
+    await loadDogs();
+    await loadWalks();
+
+    const res = await fetch('/api/users/me');
+    const user = await res.json();
+    username.value = user.username;
+  } catch (err) {
+    console.error('Failed to load user info:', err);
+  }
+});
+
 
         return {
           username,
