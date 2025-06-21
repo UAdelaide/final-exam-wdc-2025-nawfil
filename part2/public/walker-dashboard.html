@@ -92,10 +92,10 @@
     createApp({
       setup() {
         const logout = async () => {
-      try {
-        await fetch('/api/users/logout', {
-          method: 'POST',
-          credentials: 'include'
+          try {
+                await fetch('/api/users/logout', {
+                method: 'POST',
+                credentials: 'include'
         });
         window.location.href = '/index.html'; // or wherever your login page is
       } catch (err) {
