@@ -87,6 +87,26 @@
         };
       }
     }).mount('#app');
+    const { createApp } = Vue;
+
+createApp({
+  setup() {
+    const logout = async () => {
+      try {
+        await fetch('/api/users/logout', {
+          method: 'POST',
+          credentials: 'include'
+        });
+        window.location.href = '/index.html'; // or wherever your login page is
+      } catch (err) {
+        alert('Logout failed.');
+      }
+    };
+
+    return { logout };
+  }
+}).mount('#app');
+
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
