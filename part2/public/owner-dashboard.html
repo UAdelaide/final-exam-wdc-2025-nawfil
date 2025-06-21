@@ -75,39 +75,41 @@
     createApp({
       setup() {
         const dog_id = ref('');
+        const dogs = ref([]);
+        const username = ref('');
         const requested_time = ref('');
         const duration_minutes = ref('');
         const location = ref('');
-        const message = ref('');
-        const error = ref('');
         const walks = ref([]);
-        const dogs = ref([]); // <- NEW LINE
 
         const logout = async () => {
           try {
-            await fetch('/api/users/logout', { method: 'POST' });
+            await fetch('/api/users/logout', {
+              method: 'POST',
+              credentials: 'include'
+            });
             window.location.href = './index.html';
-          } catch {
+          } catch (err) {
             alert('Logout failed.');
           }
         };
+        async function loadDogs() {
+          try {
+            const res = await fetch('/api/dogs/mydogs', {
+            credentials: 'include'
+            });
+            if (!res.ok) throw new Error('Failed to fetch dogs');
+            dogs.value = await res.json();
+          } catch (err) {
+            console.error(err);
+          }
+        }
 
         async function loadWalks() {
           try {
             const res = await fetch('/api/walks');
-            if (!res.ok) throw new Error('failed to load walk requests');
+            if (!res.ok) throw new Error('Failed to load walk requests');
             walks.value = await res.json();
-          } catch (err) {
-            error.value = err.message;
-          }
-        }
-
-        //load dogs owned by logged-in owner
-        async function loadDogs() {
-          try {
-            const res = await fetch('/api/dogs/mine'); // assumes route exists
-            if (!res.ok) throw new Error('Failed to load dogs');
-            dogs.value = await res.json();
           } catch (err) {
             error.value = err.message;
           }
@@ -122,40 +124,49 @@
                 dog_id: dog_id.value,
                 requested_time: requested_time.value,
                 duration_minutes: duration_minutes.value,
-                location: location.value,
+                location: location.value
               }),
-              credentials: 'include',
+              credentials: 'include'
             });
             const result = await res.json();
-            if (!res.ok) throw new Error(result.error || 'Error submitting request');
+            if (!res.ok) throw new Error(result.error || 'Error submitting walk request');
             message.value = result.message;
-            await loadWalks(); // reload walk list
+            error.value = '';
+            await loadWalks();
           } catch (err) {
             error.value = err.message;
+            message.value = '';
           }
         }
 
         onMounted(() => {
-          loadWalks();
           loadDogs();
+          loadWalks();
+          try {
+            const res = await fetch('/api/users/me');
+            const user = await res.json();
+            username.value = user.username;
+          } catch (err) {
+            console.error('Failed to load user info:', err);
+          }
         });
 
         return {
+          username,
           dog_id,
+          dogs,
           requested_time,
           duration_minutes,
           location,
+          walks,
           message,
           error,
-          walks,
-          dogs,
           submitWalkRequest,
           logout
         };
       }
     }).mount('#app');
-    </script>
-
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
