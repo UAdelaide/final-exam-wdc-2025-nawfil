@@ -140,17 +140,23 @@
         }
 
         onMounted(async () => {
-  try {
-    await loadDogs();
-    await loadWalks();
+  console.log('onMounted called');
 
+  try {
+    console.log('Calling loadDogs...');
+    await loadDogs();
+    console.log('Calling loadWalks...');
+    await loadWalks();
+    console.log('Fetching user info...');
     const res = await fetch('/api/users/me');
     const user = await res.json();
+    console.log('User data:', user);
     username.value = user.username;
   } catch (err) {
-    console.error('Failed to load user info:', err);
+    console.error('Error in onMounted:', err);
   }
 });
+
 
 
         return {
