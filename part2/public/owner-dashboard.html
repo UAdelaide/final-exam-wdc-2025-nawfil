@@ -75,9 +75,7 @@
         const duration_minutes = ref('');
         const location = ref('');
         const walks = ref([]);
-        const message = ref('');
-        const error = ref('');
-
+       
         const logout = async () => {
           try {
             await fetch('/api/users/logout', {
@@ -129,7 +127,7 @@
           try {
             const res = await fetch('/api/users/me');
             const user = await res.json();
-            username.value = user.username;  
+            username.value = user.username;
           } catch (err) {
             console.error('Failed to load user info:', err);
           }
