@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 require('dotenv').config();
-
+const dogRoutes = require('./routes/dogRoutes');
 const app = express();
 
 // Middleware
