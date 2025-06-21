@@ -131,6 +131,7 @@
         }
 
         onMounted(() => {
+          loadDogs();
           loadWalks();
           try {
             const res = await fetch('/api/users/me');
