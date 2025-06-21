@@ -39,10 +39,6 @@
       </div>
     </div>
 
-    <!-- Success or error messages -->
-    <div v-if="message" class="alert alert-info">{{ message }}</div>
-    <div v-if="error" class="alert alert-danger">{{ error }}</div>
-
     <!-- List of walk requests -->
     <h2 class="mb-3">My Walk Requests</h2>
     <div class="row" v-if="walks.length > 0">
@@ -75,7 +71,7 @@
         const duration_minutes = ref('');
         const location = ref('');
         const walks = ref([]);
-       
+
         const logout = async () => {
           try {
             await fetch('/api/users/logout', {
