@@ -35,6 +35,17 @@ router.get('/me', (req, res) => {
   res.json(req.session.user);
 });
 
+// POST logout
+router.post('/logout', (req, res) => {
+  req.session.destroy(err => {
+    if (err) {
+      return res.status(500).json({ error: 'Logout failed' });
+    }
+    res.clearCookie('connect.sid'); // assuming default cookie name
+    res.json({ message: 'Logout successful' });
+  });
+});
+
 // POST login (dummy version)
 router.post('/login', async (req, res) => {
   const { username, password } = req.body;
