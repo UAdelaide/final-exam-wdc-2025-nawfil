@@ -53,10 +53,10 @@
                   credentials: 'include'
               });
            window.location.href = '/index.html'; // or your login page
-          } catch (err) {
+            } catch (err) {
           alert('Logout failed.');
-    }
-  };
+          }
+        };
         async function loadWalkRequests() {
           try {
             const res = await fetch('/api/walks');
