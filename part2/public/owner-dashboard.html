@@ -33,15 +33,15 @@
           </div>
           <div class="mb-3">
             <label class="form-label">Requested Date & Time</label>
-            <input v-model="form.requested_time" type="datetime-local" class="form-control" required>
+            <input v-model="requested_time" type="datetime-local" class="form-control" required>
           </div>
           <div class="mb-3">
             <label class="form-label">Duration (minutes)</label>
-            <input v-model="form.duration_minutes" type="number" class="form-control" required>
+            <input v-model="duration_minutes" type="number" class="form-control" required>
           </div>
           <div class="mb-3">
             <label class="form-label">Location</label>
-            <input v-model="form.location" type="text" class="form-control" required>
+            <input v-model="location" type="text" class="form-control" required>
           </div>
           <button type="submit" class="btn btn-success">Create Walk</button>
         </form>
