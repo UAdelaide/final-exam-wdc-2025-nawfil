@@ -91,8 +91,8 @@
             });
             if (!res.ok) throw new Error('Failed to fetch dogs');
             dogs.value = await res.json();
-  } catch (err) {
-    console.error(err);
+          } catch (err) {
+            console.error(err);
   }
 }
 
