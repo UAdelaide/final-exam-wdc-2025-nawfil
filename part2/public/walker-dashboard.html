@@ -89,9 +89,9 @@
     }).mount('#app');
     const { createApp } = Vue;
 
-createApp({
-  setup() {
-    const logout = async () => {
+    createApp({
+      setup() {
+        const logout = async () => {
       try {
         await fetch('/api/users/logout', {
           method: 'POST',
