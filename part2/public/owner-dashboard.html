@@ -129,9 +129,9 @@
           try {
             const res = await fetch('/api/users/me');
             const user = await res.json();
-         username.value = user.username;  // ✅ Correct field
-  } catch (err) {
-    console.error('Failed to load user info:', err);
+            username.value = user.username;  // ✅ Correct field
+          } catch (err) {
+            console.error('Failed to load user info:', err);
   }
         });
 
