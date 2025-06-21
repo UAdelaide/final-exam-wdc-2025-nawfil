@@ -140,9 +140,9 @@
         }
 
         onMounted(() => {
-          loadDogs();
-          loadWalks();
           try {
+            loadDogs();
+            loadWalks();
             const res = await fetch('/api/users/me');
             const user = await res.json();
             username.value = user.username;
